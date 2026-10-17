@@ -1,11 +1,3 @@
-//Checks und Berechtigungen
-if(sessionStorage.getItem("ButtonClicked") !== "true"){
-  window.location.replace('start.html');
-} else {
-  document.documentElement.requestFullscreen();
-}
-sessionStorage.clear();
-
 if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
   DeviceOrientationEvent.requestPermission().then(state =>{
     if ( state === 'granted') window.addEventListener('deviceorientation', onTilt);

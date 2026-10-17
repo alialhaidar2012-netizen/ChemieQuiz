@@ -1,6 +1,8 @@
 //Checks und Berechtigungen
 if(sessionStorage.getItem("ButtonClicked") !== "true"){
   window.location.replace('start.html');
+} else {
+  document.documentElement.requestFullscreen();
 }
 sessionStorage.clear();
 

@@ -1,11 +1,3 @@
-if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
-  DeviceOrientationEvent.requestPermission().then(state =>{
-    if ( state === 'granted') window.addEventListener('deviceorientation', onTilt);
-  });
-}else{
-  window.addEventListener('deviceorientation', onTilt);
-}
-  
 //imports
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/GLTFLoader.js';
@@ -278,4 +270,33 @@ checkCollisions();
   //rendern: zeichnen der Scene
   renderer.render(scene, camera);
 }
+
+//starten des Spiels
+document.getElementById('startBtn').addEventListener('click', async () => {
+  try{
+    //1.Vollbild anfordern
+    await document.documentElement.requestFullscreen();
+  } catch (error){
+    alert("Bitte halte dein Handy im Querformat");
+  }
+
+  //2.Sensor Berechtigung für iOS anfordern
+  if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
+try{  
+  DeviceOrientationEvent.requestPermission().then(state =>{
+    if ( state === 'granted') window.addEventListener('deviceorientation', onTilt);
+  });
+}else{
+  window.addEventListener('deviceorientation', onTilt);
+}
+}catch(error){
+  alert("Zugriff auf den Sensor wurde verweigert");                                       
+}
+
+//3.Startbildschirm ausblenden
+document.getElementById('startScreen').style.display = 'none';
+
+//4. Kalibrierung zurücksetzen und Spiel starten
+isCalibrated = false;
 animate();
+});

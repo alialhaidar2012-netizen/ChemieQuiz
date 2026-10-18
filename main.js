@@ -225,8 +225,7 @@ function checkCollisions() {
 
 
 //Listeners
-
-
+document.getElementById('fireBtn').addEventListener('click', createRocket, false);
 
 //Loop
 function animate(time) {
@@ -265,6 +264,8 @@ function animate(time) {
     camera.up.set(0,1,0).applyQuaternion(spielerContainer.quaternion);
     camera.lookAt(spielerContainer.position);
   }
+  //Raketen
+  updateRockets(rockets, ziel, zielRadius, callback);
   //Kollisionenüberprüfen
 checkCollisions();
   //rendern: zeichnen der Scene

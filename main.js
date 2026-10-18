@@ -283,11 +283,11 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     if (screen.orientation && screen.orientation.lock){ //sicherheitscheck für iOS ob der Browser die Funktion kennt
       await screen.orientation.lock('landscape'); //jetzt ins querformat
     }
-    window.addEventListener('resize' () => {
+    window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight; //neue Berechnung des Sichtfelds der Kamera da querformat
       camera.updateProjectionMatrix(); //3D-Perspektive wird neu Berechnet damit Bild nicht gestreckt
       renderer.setSize(window.innerWidth, window.innerHeight); // Zeichenfläche bekommt neue Größe
-      renderer.setPixelRation(Math.min(window.devicePixelRatio, 2))
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     });
   } catch (error){
     alert("Bitte halte dein Handy im Querformat");

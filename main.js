@@ -285,12 +285,14 @@ document.getElementById('startBtn').addEventListener('click', async () => {
 try{
   const state = await DeviceOrientationEvent.requestPermission();
     if ( state === 'granted'){ 
-      window.addEventListener('deviceorientation', onTilt);
+      window.addEventListener('deviceorientation', onTilt); //für iOS
 }
 }catch(error){
   alert("Zugriff auf den Sensor wurde verweigert");                                       
+  }
+}else {
+ window.addEventListener('deviceorientation', onTilt); //für Android
 }
-
 //3.Startbildschirm ausblenden
 document.getElementById('startScreen').style.display = 'none';
 

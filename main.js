@@ -280,14 +280,12 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     alert("Bitte halte dein Handy im Querformat");
   }
 
-  //2.Sensor Berechtigung für iOS anfordern
+  //2.Sensor Berechtigung anfordern
   if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
-try{  
-  DeviceOrientationEvent.requestPermission().then(state =>{
-    if ( state === 'granted') window.addEventListener('deviceorientation', onTilt);
-  });
-}else{
-  window.addEventListener('deviceorientation', onTilt);
+try{
+  const state = await DeviceOrientationEvent.requestPermission();
+    if ( state === 'granted'){ 
+      window.addEventListener('deviceorientation', onTilt);
 }
 }catch(error){
   alert("Zugriff auf den Sensor wurde verweigert");                                       

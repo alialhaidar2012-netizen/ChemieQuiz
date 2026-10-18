@@ -114,8 +114,8 @@ function onTilt(event){
   
   if(Math.abs(x) < 3) x = 0; //zu leichte Bewegungen werden nicht beachtet verhindert rattern
   if(Math.abs(y) < 3) y = 0; //zu leichte Bewegungen werden nicht beachtet verhindert rattern
-    tiltX = Math.max(-1, Math.min(1, x / 25)); //sorgt dafür das beim nach rechts(1) und links(-1) nicht zu stark ausschlägt
-  tiltY = Math.max(-1, Math.min(1, y / 25)); //-1 beim hinteren Kippen→ oben fliegen + 1 beim vorderen Kippen→ unten fliegen
+    tiltX = Math.max(-1, Math.min(1, x / 20)); //sorgt dafür das beim nach rechts(1) und links(-1) nicht zu stark ausschlägt
+  tiltY = Math.max(-1, Math.min(1, y / 20)); //-1 beim hinteren Kippen→ oben fliegen + 1 beim vorderen Kippen→ unten fliegen
   }
 //Asteroiden Laden und Platz festlegen
 function createAstroidTemplate() {

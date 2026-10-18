@@ -274,13 +274,26 @@ checkCollisions();
 //starten des Spiels
 document.getElementById('startBtn').addEventListener('click', async () => {
   try{
-    //1.Vollbild anfordern
+    //Vollbild anfordern
     await document.documentElement.requestFullscreen();
+    await new Promise((resolve) => { //das Promise paussiert den Code bis resolve Bescheid gibt
+      if (document.fullscreenElement) return resolve(); //wenn Handy bereits Vollbild das mach sofort weiter also kein resolve
+      document.addEventListener('fullscreenchange', resolve, {once: true}); //wenn fullscreenchange(Vollbild) aktiviert wird resolve aufgerufen
+    }); //once sorgt dafür das der Listener nach verwendung gelöscht wird => keine Zumüllung des Speichers
+    if (screen.orientation && screen.orientation.lock){ //sicherheitscheck für iOS ob der Browser die Funktion kennt
+      await screen.orientation.lock('landscape'); //jetzt ins querformat
+    }
+    window.addEventListener('resize' () => {
+      camera.aspect = window.innerWidth / window.innerHeight; //neue Berechnung des Sichtfelds der Kamera da querformat
+      camera.updateProjectionMatrix(); //3D-Perspektive wird neu Berechnet damit Bild nicht gestreckt
+      renderer.setSize(window.innerWidth, window.innerHeight); // Zeichenfläche bekommt neue Größe
+      renderer.setPixelRation(Math.min(window.devicePixelRatio, 2))
+    });
   } catch (error){
     alert("Bitte halte dein Handy im Querformat");
   }
 
-  //2.Sensor Berechtigung anfordern
+  //Sensor Berechtigung anfordern
   if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function'){
 try{
   const state = await DeviceOrientationEvent.requestPermission();
@@ -293,10 +306,10 @@ try{
 }else {
  window.addEventListener('deviceorientation', onTilt); //für Android
 }
-//3.Startbildschirm ausblenden
+//Startbildschirm ausblenden
 document.getElementById('startScreen').style.display = 'none';
 
-//4. Kalibrierung zurücksetzen und Spiel starten
+//Kalibrierung zurücksetzen und Spiel starten
 isCalibrated = false;
 animate();
 });

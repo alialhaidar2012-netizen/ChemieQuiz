@@ -219,10 +219,26 @@ function updateRockets(rockets, ziel, zielRadius, callback) {
 }
 
 //Kollisionen überprüfen
-function checkCollisions() {
-   
+function checkCollisionsWithPlayer() {
+  for(let i=0; i < asteroids.length; i++){
+   const distance = asteroid[i].position.distanceTo(rocket);
+   if (distance < zielRadius){
+    asteroid.splice(i, 1);
+    }
+  }   
 }
-
+function checkCollisions(zielRadius){
+  for(let i=0; i < asteroids.length; i++){
+    const distanceToRocket = asteroid[i].position.distanceTo(rocket);
+    const distanceToAsteroid = asteroid[i].position.distanceTo(playerContainer);
+    if (distanceToRocket < zielRadius){
+      asteroid.splice(i, 1);
+    }else if(distanceToAsteroid < zielRadius){
+      asteroid.splice(i,1);
+      playerContainer.splice(i,1);
+    }
+  }
+}
 
 //Listeners
 document.getElementById('fireBtn').addEventListener('click', shootPlayer, false);

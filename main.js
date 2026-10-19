@@ -23,14 +23,14 @@ let spielerContainer = new THREE.Group();
 let playerAlive = false;
 let playerRocketSpeed = 100;
 //Raketen
-let playerRockets = [];
+let rockets = [];
 let rocketTemplate = null;
 
 //Asteroiden
 let sichtfeldXPosition = 0;
 let asteroidModell = null;
 let asteroidTemplate = null;
-
+let asteroids = [];
 //Steuerung
 let tiltX = 0;
 let tiltY = 0;
@@ -158,7 +158,7 @@ function shootPlayer() {
   spielerContainer.quaternion,
   playerRocketSpeed
   );
-playerRockets.push(rocket);
+rockets.push(rocket);
 }
  if (!rocketTemplate) {
    const rocketLoader = new GLTFLoader();

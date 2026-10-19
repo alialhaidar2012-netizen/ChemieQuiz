@@ -220,12 +220,12 @@ function updateRockets(rockets, ziel, zielRadius, callback) {
 
 //Kollisionen überprüfen
 function checkCollisions() {
-
+   
 }
 
 
 //Listeners
-document.getElementById('fireBtn').addEventListener('click', createRocket, false);
+document.getElementById('fireBtn').addEventListener('click', shootPlayer, false);
 
 //Loop
 function animate(time) {

@@ -113,15 +113,15 @@ function onTilt(event){
   let rawY = isQuerformat ? event.gamma : event.beta;
   
   if(!isCalibrated){
-    neutralX = event.gamma;
-    neutralY = event.beta;
+    neutralX = rawX;
+    neutralY = rawY;
     isCalibrated = true;
   }
   let x = rawX - neutralX; //berechnet Drehung von Links und Rechts
   let y = rawY - neutralY; //berechnet Drehung von Oben und Unten
   
-  if(Math.abs(x) < 3) x = x - (Math.sign(x) * 3); else x = 0;//zu leichte Bewegungen werden nicht beachtet verhindert rattern
-  if(Math.abs(y) < 3) y = y - (Math.sign(y) * 3);else y = 0; //abs nimmt den Betrag der Zahl //sign nimmt Vorzeichen //sorgt sorgt dafür das es sich langsam dreht und nicht springt
+  if(Math.abs(x) > 3) x = x - (Math.sign(x) * 3); else x = 0;//zu leichte Bewegungen werden nicht beachtet verhindert rattern
+  if(Math.abs(y) > 3) y = y - (Math.sign(y) * 3);else y = 0; //abs nimmt den Betrag der Zahl //sign nimmt Vorzeichen //sorgt sorgt dafür das es sich langsam dreht und nicht springt
  
   let targetX = Math.max(-1, Math.min(1, x / 17)); //sorgt dafür das beim nach rechts(1) und links(-1) nicht zu stark ausschlägt
   let targetY = Math.max(-1, Math.min(1, y / 17)); //-1 beim hinteren Kippen→ oben fliegen + 1 beim vorderen Kippen→ unten fliegen

@@ -128,6 +128,9 @@ function onTilt(event){
 
   smoothX += (targetX - smoothX) * 0.15;
   smoothY += (targetY - smoothY) * 0.15;
+
+  tiltX = smoothX;
+  tiltY = smoothY;
 }
 //Asteroiden Laden und Platz festlegen
 function createAstroidTemplate() {
@@ -226,22 +229,32 @@ function updateRockets(rockets) {
 }
 function checkCollisions(zielRadius){
   for(let i= asteroids.length-1; i > 0; i--){
+    
+    // Hat die Rakete was getroffen
     const distanceToRocket = asteroids[i].position.distanceTo(rocket);
-    const distanceToAsteroid = asteroids[i].position.distanceTo(spielerContainer);
     if (distanceToRocket < zielRadius){
       rockets.splice(i,1);
       scene.remove(rocket.mesh);
       asteroids.splice(i, 1);
-    }else if(distanceToAsteroid < zielRadius){
+      break; // beende die Schleife
+    }
+    
+    // Spieler getroffen
+    const distanceToAsteroid = asteroids[i].position.distanceTo(spielerContainer);
+    if(distanceToAsteroid < zielRadius){
       asteroids.splice(i,1);
       spielerContainer.splice(i,1);
       playerAlive = false;
-    }
+      continue; // mach mit dem NächstemElement weiter 
+    } 
   }
 }
 
 //Listeners
-document.getElementById('fireBtn').addEventListener('click', shootPlayer, false);
+document.getElementById('fireBtn').addEventListener('pointdowm', (event) {
+  event.preventDefault(); // stoppt bei schnellem klicken das markieren oder zoomen 
+  shootPlayer();
+});
 
 //Loop
 function animate(time) {

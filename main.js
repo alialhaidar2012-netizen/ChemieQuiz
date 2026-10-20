@@ -161,6 +161,10 @@ function shootPlayer() {
 rockets.push(rocket);
 }
  if (!rocketTemplate) {
+    createRocketTemplate();
+   }
+ function createRocketTemplate(){
+    if (!rocketTemplate) {
    const rocketLoader = new GLTFLoader();
    rocketLoader.load('models/Rocket/scene.gltf', (gltf) =>
    {
@@ -172,7 +176,7 @@ rockets.push(rocket);
        rocketTemplate.add(rocketModel);
          });
    }
-   
+ }
 function createRocket(startPosition, direction, quaternion, speed){
   if (!rocketTemplate) return null; 
   const rocket = rocketTemplate.clone();
@@ -192,7 +196,7 @@ function createRocket(startPosition, direction, quaternion, speed){
     lebenszeit: 5
   }
 }
-function updateRockets(rockets, ziel, zielRadius, callback) {
+function updateRockets(rockets, zielRadius, callback) {
   for (let i = rockets.length -1; i >= 0; i--){
     const r = rockets[i];
     
@@ -216,16 +220,6 @@ function updateRockets(rockets, ziel, zielRadius, callback) {
       rockets.splice(i,1);
     }
   }
-}
-
-//Kollisionen überprüfen
-function checkCollisionsWithPlayer() {
-  for(let i=0; i < asteroids.length; i++){
-   const distance = asteroid[i].position.distanceTo(rocket);
-   if (distance < zielRadius){
-    asteroid.splice(i, 1);
-    }
-  }   
 }
 function checkCollisions(zielRadius){
   for(let i=0; i < asteroids.length; i++){

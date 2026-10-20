@@ -213,7 +213,7 @@ function updateRockets(rockets) {
   }
 }
 function checkCollisions(zielRadius){
-  for(let i=asteroids.length; i > 0; i--){
+  for(let i= asteroids.length-1; i > 0; i--){
     const distanceToRocket = asteroids[i].position.distanceTo(rocket);
     const distanceToAsteroid = asteroids[i].position.distanceTo(spielerContainer);
     if (distanceToRocket < zielRadius){

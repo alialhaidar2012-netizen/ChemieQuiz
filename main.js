@@ -34,6 +34,8 @@ let asteroids = [];
 //Steuerung
 let tiltX = 0;
 let tiltY = 0;
+let smoothX = 0;
+let smoothY = 0;
 let neutralX = 0;
 let neutralY = 0;
 let isCalibrated = false;
@@ -104,19 +106,29 @@ playerLoader.load('models/Player/scene.gltf', (gltf) =>{
 //Steuerung
 function onTilt(event){
   if (event.beta === null || event.gamma === null) return;
+  
+  const isQuerformat = window.innerWidth > window.innerHeight;
+
+  let rawX = isQuerformat ? event.beta : event.gamma;
+  let rawY = isQuerformat ? event.gamma : event.beta;
+  
   if(!isCalibrated){
     neutralX = event.gamma;
     neutralY = event.beta;
     isCalibrated = true;
   }
-  let x = event.gamma - neutralX; //berechnet Drehung von Links und Rechts
-  let y = event.beta - neutralY; //berechnet Drehung von Oben und Unten
+  let x = rawX - neutralX; //berechnet Drehung von Links und Rechts
+  let y = rawY - neutralY; //berechnet Drehung von Oben und Unten
   
-  if(Math.abs(x) < 3) x = 0; //zu leichte Bewegungen werden nicht beachtet verhindert rattern
-  if(Math.abs(y) < 3) y = 0; //zu leichte Bewegungen werden nicht beachtet verhindert rattern
-    tiltX = Math.max(-1, Math.min(1, x / 20)); //sorgt dafür das beim nach rechts(1) und links(-1) nicht zu stark ausschlägt
-  tiltY = Math.max(-1, Math.min(1, y / 20)); //-1 beim hinteren Kippen→ oben fliegen + 1 beim vorderen Kippen→ unten fliegen
-  }
+  if(Math.abs(x) < 3) x = x - (Math.sign(x) * 3); else x = 0;//zu leichte Bewegungen werden nicht beachtet verhindert rattern
+  if(Math.abs(y) < 3) y = y - (Math.sign(y) * 3);else y = 0; //abs nimmt den Betrag der Zahl //sign nimmt Vorzeichen //sorgt sorgt dafür das es sich langsam dreht und nicht springt
+ 
+  let targetX = Math.max(-1, Math.min(1, x / 17)); //sorgt dafür das beim nach rechts(1) und links(-1) nicht zu stark ausschlägt
+  let targetY = Math.max(-1, Math.min(1, y / 17)); //-1 beim hinteren Kippen→ oben fliegen + 1 beim vorderen Kippen→ unten fliegen
+
+  smoothX += (targetX - smoothX) * 0.15;
+  smoothY += (targetY - smoothY) * 0.15;
+}
 //Asteroiden Laden und Platz festlegen
 function createAstroidTemplate() {
 const asteroidLoader = new GLTFLoader(); //Loader für Asteroiden
@@ -272,8 +284,10 @@ function animate(time) {
   }
   //Raketen
   updateRockets(rockets);
+  
   //Kollisionenüberprüfen
 checkCollisions();
+  
   //rendern: zeichnen der Scene
   renderer.render(scene, camera);
 }

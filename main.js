@@ -205,16 +205,7 @@ function updateRockets(rockets, zielRadius, callback) {
     r.mesh.position.z += r.richtung.z * r.speed * delta;
     
     r.lebenszeit -= delta;
-    
-    if (ziel) {
-      const distanz = r.mesh.position.distanceTo(ziel);
-      if (distanz <= zielRadius) {
-        scene.remove(r.mesh);
-        rockets.splice(i,1)
-        if(callback) callback();
-        continue;
-      }
-    }
+  
     if (r.lebenszeit <= 0){
       scene.remove(r.mesh);
       rockets.splice(i,1);

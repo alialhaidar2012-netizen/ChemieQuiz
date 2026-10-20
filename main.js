@@ -20,7 +20,7 @@ let beschleunigung = 0.1;
 let richtung = new  THREE.Vector3(0, 0, 1);
 let makeSpeed = true;
 let spielerContainer = new THREE.Group();
-let playerAlive = false;
+let playerAlive = true;
 let playerRocketSpeed = 100;
 //Raketen
 let rockets = [];
@@ -196,7 +196,7 @@ function createRocket(startPosition, direction, quaternion, speed){
     lebenszeit: 5
   }
 }
-function updateRockets(rockets, zielRadius, callback) {
+function updateRockets(rockets) {
   for (let i = rockets.length -1; i >= 0; i--){
     const r = rockets[i];
     
@@ -214,13 +214,16 @@ function updateRockets(rockets, zielRadius, callback) {
 }
 function checkCollisions(zielRadius){
   for(let i=0; i < asteroids.length; i++){
-    const distanceToRocket = asteroid[i].position.distanceTo(rocket);
-    const distanceToAsteroid = asteroid[i].position.distanceTo(playerContainer);
+    const distanceToRocket = asteroids[i].position.distanceTo(rocket);
+    const distanceToAsteroid = asteroids[i].position.distanceTo(spielerContainer);
     if (distanceToRocket < zielRadius){
-      asteroid.splice(i, 1);
+      rockets.splice(i,1);
+      scene.remove(rocket.mesh);
+      asteroids.splice(i, 1);
     }else if(distanceToAsteroid < zielRadius){
-      asteroid.splice(i,1);
-      playerContainer.splice(i,1);
+      asteroids.splice(i,1);
+      spielerContainer.splice(i,1);
+      playerAlive = false;
     }
   }
 }
@@ -230,6 +233,8 @@ document.getElementById('fireBtn').addEventListener('click', shootPlayer, false)
 
 //Loop
 function animate(time) {
+  if(!playerAlive) return;
+  
   requestAnimationFrame(animate); //sorgt für die regelmäßigen Aufrufe von animate
   delta = clock.getDelta();
   
@@ -266,7 +271,7 @@ function animate(time) {
     camera.lookAt(spielerContainer.position);
   }
   //Raketen
-  updateRockets(rockets, ziel, zielRadius, callback);
+  updateRockets(rockets);
   //Kollisionenüberprüfen
 checkCollisions();
   //rendern: zeichnen der Scene

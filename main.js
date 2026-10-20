@@ -23,6 +23,7 @@ let spielerContainer = new THREE.Group();
 let playerAlive = true;
 let playerRocketSpeed = 100;
 //Raketen
+let zielradius = 15;
 let rockets = [];
 let rocketTemplate = null;
 
@@ -31,6 +32,7 @@ let sichtfeldXPosition = 0;
 let asteroidModell = null;
 let asteroidTemplate = null;
 let asteroids = [];
+
 //Steuerung
 let tiltX = 0;
 let tiltY = 0;
@@ -39,6 +41,7 @@ let smoothY = 0;
 let neutralX = 0;
 let neutralY = 0;
 let isCalibrated = false;
+
 //Skybox
 if (scene){
 const loader = new THREE.CubeTextureLoader();
@@ -250,7 +253,7 @@ function checkCollisions(zielRadius){
 }
 
 //Listeners
-document.getElementById('fireBtn').addEventListener('pointdown', (event) => {
+document.getElementById('fireBtn').addEventListener('pointerdown', (event) => {
   event.preventDefault(); // stoppt bei schnellem klicken das markieren oder zoomen 
   shootPlayer();
 });

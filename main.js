@@ -229,6 +229,14 @@ function updateRockets(rockets) {
 }
 function checkCollisions(zielRadius){
   for(let i= asteroids.length-1; i > 0; i--){
+    // Spieler getroffen
+    const distanceToAsteroid = asteroids[i].position.distanceTo(spielerContainer);
+    if(distanceToAsteroid < zielRadius){
+      asteroids.splice(i,1);
+      spielerContainer.splice(i,1);
+      playerAlive = false;
+      continue; // mach mit dem NächstemElement weiter 
+    }
     
     // Hat die Rakete was getroffen
     const distanceToRocket = asteroids[i].position.distanceTo(rocket);
@@ -238,15 +246,6 @@ function checkCollisions(zielRadius){
       asteroids.splice(i, 1);
       break; // beende die Schleife
     }
-    
-    // Spieler getroffen
-    const distanceToAsteroid = asteroids[i].position.distanceTo(spielerContainer);
-    if(distanceToAsteroid < zielRadius){
-      asteroids.splice(i,1);
-      spielerContainer.splice(i,1);
-      playerAlive = false;
-      continue; // mach mit dem NächstemElement weiter 
-    } 
   }
 }
 

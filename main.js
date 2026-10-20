@@ -251,7 +251,7 @@ function checkCollisions(zielRadius){
 }
 
 //Listeners
-document.getElementById('fireBtn').addEventListener('pointdowm', (event) {
+document.getElementById('fireBtn').addEventListener('pointdown', (event) => {
   event.preventDefault(); // stoppt bei schnellem klicken das markieren oder zoomen 
   shootPlayer();
 });

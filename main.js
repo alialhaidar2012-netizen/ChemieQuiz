@@ -232,10 +232,11 @@ function updateRockets(rockets) {
 }
 function checkCollisions(zielRadius){
   for(let i= asteroids.length-1; i > 0; i--){
+    let asteroid = asteroids[i];
     // Spieler getroffen
-    const distanceToAsteroid = asteroids[i].position.distanceTo(spielerContainer);
+    const distanceToAsteroid = asteroid[i].position.distanceTo(spielerContainer);
     if(distanceToAsteroid < zielRadius){
-      asteroids.splice(i,1);
+      asteroid.splice(i,1);
       spielerContainer.splice(i,1);
       playerAlive = false;
       continue; // mach mit dem NächstemElement weiter 

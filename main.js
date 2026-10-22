@@ -242,12 +242,16 @@ function checkCollisions(zielRadius){
     }
     
     // Hat die Rakete was getroffen
-    const distanceToRocket = asteroids[i].position.distanceTo(rocket);
+  for(let j = rockets.length-1; j > 0; j--){
+    let rocket = rocket[j]
+    const distanceToRocket = asteroids[i].position.distanceTo(rocket.mesh.position);
     if (distanceToRocket < zielRadius){
+      asteroids.splice(i,1);
       rockets.splice(i,1);
       scene.remove(rocket.mesh);
       asteroids.splice(i, 1);
       break; // beende die Schleife
+      }
     }
   }
 }
@@ -301,7 +305,7 @@ function animate(time) {
   updateRockets(rockets);
   
   //Kollisionenüberprüfen
-checkCollisions();
+checkCollisions(zielRadius);
   
   //rendern: zeichnen der Scene
   renderer.render(scene, camera);

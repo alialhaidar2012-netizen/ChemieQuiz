@@ -23,7 +23,7 @@ let spielerContainer = new THREE.Group();
 let playerAlive = true;
 let playerRocketSpeed = 100;
 //Raketen
-let zielradius = 15;
+let zielRadius = 15;
 let rockets = [];
 let rocketTemplate = null;
 

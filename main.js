@@ -153,7 +153,7 @@ function setAsteroids() {
   if (!asteroidTemplate) return;
   let asteroid = asteroidTemplate.clone();
   scene.add(asteroid);
-  
+  asteroids.push(asteroid);
   let vorzeichenWahrscheinlichkeit = Math.random() * 10;
   
   if (vorzeichenWahrscheinlichkeit > 5){

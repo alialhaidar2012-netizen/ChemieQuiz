@@ -108,7 +108,7 @@ playerLoader.load('models/Player/scene.gltf', (gltf) =>{
   spielerContainer.position.set(0, 0, 0);
   spielerMixer.timeScale = 0.5;
 
-  spielerLoaded = true;
+  playerLoaded = true;
 });
 //Steuerung
 function onTilt(event){
@@ -287,7 +287,7 @@ function animate(time) {
   }
     
     //Bewegung, Rotation und Richtung
-if(spielerLoaded){
+if(playerLoaded){
     spielerContainer.rotateY(-tiltX * 0.7 * delta);
     spielerContainer.rotateX(-tiltY * 0.7 * delta);
     

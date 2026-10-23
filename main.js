@@ -163,9 +163,9 @@ function setAsteroids() {
   let randomY = (Math.random() - 0.5)* 100;
   let randomZ = (Math.random() - 0.5)* 100;
 
-  lastAsteroidPos.x += abstandX;
-  lastAsteroidPos.y += abstandY;
-  lastAsteroidPos.z += abstandZ;
+  lastAsteroidPos.x += randomX;
+  lastAsteroidPos.y += randomY;
+  lastAsteroidPos.z += randomZ;
   }
   asteroid.position.copy(lastAsteroidPos);
 

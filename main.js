@@ -168,9 +168,9 @@ function setAsteroids() {
   lastAsteroidPos.x += randomX;
   lastAsteroidPos.y += randomY;
   lastAsteroidPos.z += randomZ;
-  }
-  asteroid.position.copy(lastAsteroidPos);
 
+  asteroid.position.copy(lastAsteroidPos);
+  }
   scene.add(asteroid);
   asteroids.push(asteroid);
   }
@@ -287,7 +287,7 @@ function animate(time) {
   }
     
     //Bewegung, Rotation und Richtung
-if(!spielerLoaded){
+if(spielerLoaded){
     spielerContainer.rotateY(-tiltX * 0.7 * delta);
     spielerContainer.rotateX(-tiltY * 0.7 * delta);
     

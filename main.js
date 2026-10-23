@@ -12,6 +12,7 @@ const clock = new THREE.Clock();
 let delta; //zählt die Zeit seit dem letzten Frame
 camera.position.z = 25;
 //spieler
+let playerLoaded = false;
 let spielerMixer = null;
 let spieler = null;
 let speed = 0;
@@ -106,6 +107,8 @@ playerLoader.load('models/Player/scene.gltf', (gltf) =>{
   
   spielerContainer.position.set(0, 0, 0);
   spielerMixer.timeScale = 0.5;
+
+  spielerLoaded = true;
 });
 //Steuerung
 function onTilt(event){
@@ -144,14 +147,13 @@ asteroidLoader.load('models/Asteroid/asteroid.gltf', (gltf) => {
   asteroidModell.scale.set(10,10,10)
   asteroidTemplate = new THREE.Group(); //Template erstellen um dann viele zu spawen für Asteroidengürtel
   asteroidTemplate.add(asteroidModell);
-
-setInterval(setAsteroids, 2000);
 });
 }
 createAstroidTemplate();
 
 function setAsteroids() {
   if (!asteroidTemplate) return;
+  if(asteroids.length < 50){
   let asteroid = asteroidTemplate.clone();
   if(!firstAsteroid){
     asteroid.position.set(0, 0, 100);
@@ -171,16 +173,7 @@ function setAsteroids() {
 
   scene.add(asteroid);
   asteroids.push(asteroid);
-  
-  //let vorzeichenWahrscheinlichkeit = Math.random() * 10;
- // if (vorzeichenWahrscheinlichkeit > 5){
-   // sichtfeldXPosition = Math.random() * 200;
-   //}else if(vorzeichenWahrscheinlichkeit < 5) {
-    //sichtfeldXPosition = (Math.random() * -1) * 200; //um auch Positionen auf der rechten Seite zu erhalten
-  //}
-  //let abstand = new THREE.Vector3(sichtfeldXPosition,0,1);
-  //let standort = spielerContainer.position.clone().add(abstand);  //Mindestabstand zum Spieler hinzufügen um das spiel nicht zu schwer zu machen
-  //asteroid.position.copy(standort);
+  }
 }
 //schießen
 function shootPlayer() {
@@ -256,6 +249,7 @@ function checkCollisions(zielRadius){
       asteroids.splice(i,1);
       scene.remove(spielerContainer);
       playerAlive = false;
+      console.log("playerAlive = false");
       continue; // mach mit dem NächstemElement weiter 
     }
     
@@ -293,17 +287,18 @@ function animate(time) {
   }
     
     //Bewegung, Rotation und Richtung
+if(!spielerLoaded){
     spielerContainer.rotateY(-tiltX * 0.7 * delta);
     spielerContainer.rotateX(-tiltY * 0.7 * delta);
     
     richtung.set(0, 0, 1);
     richtung.applyQuaternion(spielerContainer.quaternion);
     richtung.normalize();
-    
+
     spielerContainer.position.x += richtung.x * speed * delta;
     spielerContainer.position.y += richtung.y * speed * delta;
     spielerContainer.position.z += richtung.z * speed * delta;
-  
+}
   
   //Animation
   if (spielerMixer) {

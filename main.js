@@ -33,7 +33,7 @@ let sichtfeldXPosition = 0;
 let asteroidModell = null;
 let asteroidTemplate = null;
 let asteroids = [];
-
+let lastAsteroidPos = new THREE.Vector3();
 //Steuerung
 let tiltX = 0;
 let tiltY = 0;
@@ -154,16 +154,23 @@ function setAsteroids() {
   if (!asteroidTemplate) return;
   let asteroid = asteroidTemplate.clone();
   if(!firstAsteroid){
-    asteroid.position.set(100, 0, 0);
+    asteroid.position.set(0, 0, 100);
     firstAsteroid = true;
-  }
+  }else {
   scene.add(asteroid);
   asteroids.push(asteroid);
-  let randomX = Math.random() * 10;
-  let randomY = Math.random() * 10;
-  let randomZ = Math.random() * 10;
+  let randomX = (Math.random() - 0.5)* 100; //-0,5 für Positionen -20 bis 20 
+  let randomY = (Math.random() - 0.5)* 100;
+  let randomY = (Math.random() - 0.5)* 100;
 
-  
+  lastAsteroidPos.x += abstandX;
+  lastAsteroidPos.y += abstandY;
+  lastAsteroidPos.z += abstandZ;
+  }
+  asteroid.position.copy(lastAsteroidPos);
+
+  scene.add(asteroid);
+  asteroids.push(asteroid);
   
   //let vorzeichenWahrscheinlichkeit = Math.random() * 10;
  // if (vorzeichenWahrscheinlichkeit > 5){
@@ -174,7 +181,7 @@ function setAsteroids() {
   //let abstand = new THREE.Vector3(sichtfeldXPosition,0,1);
   //let standort = spielerContainer.position.clone().add(abstand);  //Mindestabstand zum Spieler hinzufügen um das spiel nicht zu schwer zu machen
   //asteroid.position.copy(standort);
-//}
+}
 //schießen
 function shootPlayer() {
   const dir = new THREE.Vector3(0,0,1);

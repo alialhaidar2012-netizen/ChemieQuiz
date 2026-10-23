@@ -153,10 +153,11 @@ createAstroidTemplate();
 
 function setAsteroids() {
   if (!asteroidTemplate) return;
-  if(asteroids.length < 50){
-  let asteroid = asteroidTemplate.clone();
+  if(asteroids.length >= 50) return;
   if(!firstAsteroid){
+  let asteroid = asteroidTemplate.clone();
     asteroid.position.set(0, 0, 100);
+    lastAsteroidPos.copy(asteroid.position)
     firstAsteroid = true;
   }else {
   scene.add(asteroid);
@@ -173,7 +174,6 @@ function setAsteroids() {
   }
   scene.add(asteroid);
   asteroids.push(asteroid);
-  }
 }
 //schießen
 function shootPlayer() {
@@ -243,10 +243,11 @@ function updateRockets(rockets) {
 function checkCollisions(zielRadius){
   for(let i= asteroids.length-1; i >= 0; i--){
     let asteroid = asteroids[i];
-    // Spieler getroffen
+    // Spieler wurde von Asteroiden getroffen
     const distanceToAsteroid = asteroid.position.distanceTo(spielerContainer.position);
     if(distanceToAsteroid < zielRadius){
       asteroids.splice(i,1);
+      scene.remove(asteroid);
       scene.remove(spielerContainer);
       playerAlive = false;
       console.log("playerAlive = false");
@@ -259,6 +260,7 @@ function checkCollisions(zielRadius){
     const distanceToRocket = asteroids[i].position.distanceTo(rocket.mesh.position);
     if (distanceToRocket < zielRadius){
       asteroids.splice(i,1);
+      scene.remove(asteroid);
       rockets.splice(j,1);
       scene.remove(rocket.mesh);
       break; // beende die Schleife
@@ -316,6 +318,8 @@ if(playerLoaded){
   //Raketen
   updateRockets(rockets);
   
+  //Asteroiden
+setAsteroids();
   //Kollisionenüberprüfen
 checkCollisions(zielRadius);
   

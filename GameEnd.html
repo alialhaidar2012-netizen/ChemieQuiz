@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <head>
   <title>GameEnd</title>
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #0d1117;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0 0 10px 0;
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    h5 {
+      font-size: 1.5rem;
+      color: #a0aab5;
+      font-weight: normal;
+      margin: 0;
+      max-width: 80%; 
+      line-height: 1.4;
+    }
+
+    body:has(h1) h1 {
+      color: #00ffcc; 
+    }
 </head>
 <body>
   <h1>GameEndStatus</h1>

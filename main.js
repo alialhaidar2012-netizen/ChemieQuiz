@@ -250,6 +250,7 @@ function checkCollisions(zielRadius){
       scene.remove(asteroid);
       scene.remove(spielerContainer);
       playerAlive = false;
+      document.getElementById('crosshair').style.display = 'none';
       console.log("playerAlive = false");
       continue; // mach mit dem NächstemElement weiter 
     }
@@ -364,7 +365,8 @@ try{
 }
 //Startbildschirm ausblenden
 document.getElementById('startScreen').style.display = 'none';
-
+//Steuerkreuz anzeigen
+document.getElementById('crosshair').style.display = 'block';d
 //Kalibrierung zurücksetzen und Spiel starten
 isCalibrated = false;
 animate();

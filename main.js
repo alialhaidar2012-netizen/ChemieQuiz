@@ -154,8 +154,8 @@ createAstroidTemplate();
 function setAsteroids() {
   if (!asteroidTemplate) return;
   if(asteroids.length >= 50) return;
-  if(!firstAsteroid){
   let asteroid = asteroidTemplate.clone();
+  if(!firstAsteroid){
     asteroid.position.set(0, 0, 100);
     lastAsteroidPos.copy(asteroid.position)
     firstAsteroid = true;

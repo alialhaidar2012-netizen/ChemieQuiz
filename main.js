@@ -23,7 +23,10 @@ let makeSpeed = true;
 let spielerContainer = new THREE.Group();
 let playerAlive = true;
 let playerRocketSpeed = 100;
+
 //Raketen
+let maxRockets = 10; //Standard Anzahl
+
 let spielerZielRadius = 15;
 let rockets = [];
 let rocketTemplate = null;
@@ -209,6 +212,7 @@ rockets.push(rocket);
    }
  }
 function createRocket(startPosition, direction, quaternion, speed){
+  if (maxRockets === 0 && getroffeneAsteroidenAnzahl < 10)  playerAlive = false;
   if (!rocketTemplate) return null; 
   const rocket = rocketTemplate.clone();
   
@@ -255,8 +259,6 @@ function checkCollisions(zielRadius){
       playerAlive = false;
       document.getElementById('crosshair').style.display = 'none';
       console.log("playerAlive = false");
-      sessionStorage.setItem("GameEndStatus", "false");
-      window.location.replace('GameEnd.html');
       continue; // mach mit dem NächstemElement weiter 
     }
     
@@ -284,7 +286,10 @@ document.getElementById('fireBtn').addEventListener('pointerdown', (event) => {
 
 //Loop
 function animate(time) {
-  if(!playerAlive) return;
+  if(!playerAlive){
+     sessionStorage.setItem("GameEndStatus", "false");
+     window.location.replace('GameEnd.html');
+  }
 
   //Bei Gewinn Seite wechseln
   if(getroffeneAsteroidenAnzahl >= 10){

@@ -25,6 +25,18 @@
     canvas {
   display: block;
 }
+#crosshair {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #00ffcc; /* Ein cooles Neon-Cyan */
+  font-size: 30px;
+  font-family: monospace;
+  pointer-events: none; /* GANZ WICHTIG: Damit man "durch" das Kreuz klicken kann */
+  z-index: 1000;
+  display: none; /* Erstmal versteckt, bis das Spiel startet */
+}
   </style>
 </head>
 <body>
@@ -32,7 +44,8 @@
     <button id="startBtn">Spiel Starten</button>
   </div>
   <button id="fireBtn">SHOOT</button>
-
+<div id="crosshair">+</div>
+  
   <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
   <script>eruda.init();</script>
 

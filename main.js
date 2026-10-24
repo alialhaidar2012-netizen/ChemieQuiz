@@ -287,7 +287,7 @@ function animate(time) {
   if(!playerAlive) return;
 
   //Bei Gewinn Seite wechseln
-  if(getroffeneAsteroidenAnzahl){
+  if(getroffeneAsteroidenAnzahl >= 10){
       sessionStorage.setItem("GameEndStatus", "true");
       window.location.replace('GameEnd.html');
   }

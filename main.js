@@ -24,11 +24,12 @@ let spielerContainer = new THREE.Group();
 let playerAlive = true;
 let playerRocketSpeed = 100;
 //Raketen
-let zielRadius = 15;
+let spielerZielRadius = 15;
 let rockets = [];
 let rocketTemplate = null;
 
 //Asteroiden
+let asteroidZielRadius = 5;
 let firstAsteroid = false;
 let sichtfeldXPosition = 0;
 let asteroidModell = null;
@@ -247,7 +248,7 @@ function checkCollisions(zielRadius){
     let asteroid = asteroids[i];
     // Spieler wurde von Asteroiden getroffen
     const distanceToAsteroid = asteroid.position.distanceTo(spielerContainer.position);
-    if(distanceToAsteroid < zielRadius){
+    if(distanceToAsteroid < spielerZielRadius){
       asteroids.splice(i,1);
       scene.remove(asteroid);
       scene.remove(spielerContainer);
@@ -263,7 +264,7 @@ function checkCollisions(zielRadius){
   for(let j = rockets.length-1; j >= 0; j--){
     let rocket = rockets[j]
     const distanceToRocket = asteroids[i].position.distanceTo(rocket.mesh.position);
-    if (distanceToRocket < zielRadius){
+    if (distanceToRocket < asteroidZielRadius){
       asteroids.splice(i,1);
       scene.remove(asteroid);
       rockets.splice(j,1);
@@ -332,7 +333,7 @@ if(playerLoaded){
   //Asteroiden
 setAsteroids();
   //Kollisionenüberprüfen
-checkCollisions(zielRadius);
+checkCollisions(spielerZielRadius);
   
   //rendern: zeichnen der Scene
   renderer.render(scene, camera);

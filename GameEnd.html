@@ -4,8 +4,18 @@
 </head>
 <body>
   <h1>GameEndStatus</h1>
+  <h5>zweitesLob</h5>
 <script>
-  
+  let GameEndStatus = null;
+  let zweitesLob = null; 
+    
+  if(sessionStorage.getItem("GameEndStatus") === "true"){
+    GameEndStatus = 'Super!';
+    zweitesLob = 'Du hast das Quiz zu Silicium super gelöst!';
+  }else if(sessionStorage.getItem("GameEndStatus") === "false"){
+    GameEndStatus = 'Verloren!';
+    zweitesLob = 'Versuche es nochmal!';
+  }
 </script>
 </body>
 </html>

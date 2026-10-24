@@ -35,6 +35,8 @@ let asteroidModell = null;
 let asteroidTemplate = null;
 let asteroids = [];
 let lastAsteroidPos = new THREE.Vector3();
+let getroffeneAsteroidenAnzahl = 0;
+
 //Steuerung
 let tiltX = 0;
 let tiltY = 0;
@@ -252,6 +254,8 @@ function checkCollisions(zielRadius){
       playerAlive = false;
       document.getElementById('crosshair').style.display = 'none';
       console.log("playerAlive = false");
+      sessionStorage.setItem("GameEndStatus", "false");
+      window.location.replace('GameEnd.html');
       continue; // mach mit dem NächstemElement weiter 
     }
     
@@ -264,6 +268,7 @@ function checkCollisions(zielRadius){
       scene.remove(asteroid);
       rockets.splice(j,1);
       scene.remove(rocket.mesh);
+      getroffeneAsteroidenAnzahl++;
       break; // beende die Schleife
       }
     }
@@ -279,7 +284,12 @@ document.getElementById('fireBtn').addEventListener('pointerdown', (event) => {
 //Loop
 function animate(time) {
   if(!playerAlive) return;
-  
+
+  //Bei Gewinn Seite wechseln
+  if(getroffeneAsteroidenAnzahl){
+      sessionStorage.setItem("GameEndStatus", "true");
+      window.location.replace('GameEnd.html');
+  }
   requestAnimationFrame(animate); //sorgt für die regelmäßigen Aufrufe von animate
   delta = clock.getDelta();
   

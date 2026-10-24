@@ -1,1 +1,24 @@
-
+<!DOCTYPE html>
+<head>
+  <title>Fragen</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div id="frage-div"></div>
+  <script>
+    const fragen = [
+      ['Aus welcher Sprache kommt der Name von Silicium',["Latein", "Griechisch", "Schwedish"], 0]
+      ,];
+    
+  fragen.forEach(function(frage){
+    let frageStellung = frage[0];
+    document.getElementById("question").textContent = frageStellung;
+    
+    let antwortmöglichkeiten = frage[1];
+    let richtigeAntwort = frage[2];
+  });
+  </script>
+</body>
+</html>

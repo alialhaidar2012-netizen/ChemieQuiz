@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <head>
   <title>GameEnd</title>
-    body {
+  <style>
+      body {
       margin: 0;
       height: 100vh;
       background-color: #0d1117;
@@ -33,20 +34,21 @@
     body:has(h1) h1 {
       color: #00ffcc; 
     }
+  </style>
 </head>
 <body>
-  <h1>GameEndStatus</h1>
-  <h5>zweitesLob</h5>
+  <h1 id="GameEndStatus"></h1>
+  <h5 id="zweitesLob"></h5>
 <script>
-  let GameEndStatus = null;
-  let zweitesLob = null; 
-    
+  document.getElementById("GameEndStatus");
+  document.getElementById("zweitesLob");
+  
   if(sessionStorage.getItem("GameEndStatus") === "true"){
-    GameEndStatus = 'Super!';
-    zweitesLob = 'Du hast das Quiz zu Silicium super gelöst!';
+    GameEndStatus.textContent = 'Super!';
+    zweitesLob.textContent = 'Du hast das Quiz zu Silicium super gelöst!';
   }else if(sessionStorage.getItem("GameEndStatus") === "false"){
-    GameEndStatus = 'Verloren!';
-    zweitesLob = 'Versuche es nochmal!';
+    GameEndStatus.textContent = 'Verloren!';
+    zweitesLob.textContent = 'Versuche es nochmal!';
   }
 </script>
 </body>

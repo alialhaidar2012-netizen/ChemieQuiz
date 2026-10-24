@@ -366,7 +366,7 @@ try{
 //Startbildschirm ausblenden
 document.getElementById('startScreen').style.display = 'none';
 //Steuerkreuz anzeigen
-document.getElementById('crosshair').style.display = 'block';d
+document.getElementById('crosshair').style.display = 'block';
 //Kalibrierung zurücksetzen und Spiel starten
 isCalibrated = false;
 animate();

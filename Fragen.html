@@ -2,8 +2,65 @@
 <head>
   <title>Fragen</title>
   <style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background-color: #0d1117;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+  }
+
+  #frage-div {
+    background: #1c2128;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #00ffcc;
+  }
+
+  button {
+    display: block; 
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 12px;
+    background-color: #2d333b;
+    color: white;
+    border: 2px solid #444c56;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
     
-  </style>
+    -webkit-tap-highlight-color: transparent; 
+    
+    transition: transform 0.1s ease, background-color 0.1s ease;
+  }
+
+  button:active {
+    background-color: #444c56;
+    border-color: #00ffcc;
+    transform: scale(0.97);
+  }
+
+  @media (max-width: 600px) {
+    input, button {
+      font-size: 16px; 
+    }
+  }
+</style>
 </head>
 <body>
   <script>

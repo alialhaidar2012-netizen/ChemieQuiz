@@ -77,7 +77,7 @@
       ['Wann wurde zum ersten Mal reines Silicium hergestellt?',["1824", "1845", "1832"], 0]
       ];
 
-    let aktuellerIdex = 0; // Fragennummer
+    let aktuellerIndex = 0; // Fragennummer
     const frageDiv = document.getElementById("frage-div");
   
   function zeigeFrage{
@@ -85,6 +85,7 @@
 
     if(aktuellerIndex >= fragen.length){
       frageDiv.innerHTML = "<h3>Super! Alle Fragenbeantwortet</h3>"
+      
       return;
     }
     let frage = fragen[aktuellerIndex]

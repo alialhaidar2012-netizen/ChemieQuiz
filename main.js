@@ -26,12 +26,13 @@ let playerRocketSpeed = 100;
 
 //Raketen
 let maxRockets = parseInt(sessionStorage.getItem("Raketenanzahl"))+10 || 0; //Standard Anzahl
-
+let rocketTemplateLoaded = false;
 let spielerZielRadius = 15;
 let rockets = [];
 let rocketTemplate = null;
 
 //Asteroiden
+let asteroidTemplateLoaded = false;
 let asteroidZielRadius = 5;
 let firstAsteroid = false;
 let sichtfeldXPosition = 0;
@@ -51,6 +52,8 @@ let neutralY = 0;
 let isCalibrated = false;
 
 //Skybox
+let skyboxLoaded = false;
+
 if (scene){
 const loader = new THREE.CubeTextureLoader();
 const textures = loader.load([
@@ -62,6 +65,7 @@ const textures = loader.load([
   './textures/space_lf.png'
 ]);
 scene.background = textures;
+skyboxLoaded = true;
 }
 //Light
 function setLights() {
@@ -154,6 +158,7 @@ asteroidLoader.load('models/Asteroid/asteroid.gltf', (gltf) => {
   asteroidTemplate = new THREE.Group(); //Template erstellen um dann viele zu spawen für Asteroidengürtel
   asteroidTemplate.add(asteroidModell);
 });
+  asteroidTemplateLoaded = true;
 }
 createAstroidTemplate();
 
@@ -209,6 +214,7 @@ rockets.push(rocket);
        rocketTemplate = new THREE.Group();
        rocketTemplate.add(rocketModel);
          });
+      rocketTemplateLoaded = true;
    }
  }
 function createRocket(startPosition, direction, quaternion, speed){
@@ -286,6 +292,12 @@ document.getElementById('fireBtn').addEventListener('pointerdown', (event) => {
 
 //Loop
 function animate(time) {
+  //Load-Checks
+if(playerLoaded === true && rocketTemplateLoaded === true  && asteroidTemplateLoaded === true && skyboxLoaded === true){
+  document.getElementById('loadingText').innerText = "Bereit!";
+  document.getElementById('startBtn').style.display = "block";
+}
+  //GameOver checks
   if(maxRockets === 0) playerAlive = false;
   if(!playerAlive){
      sessionStorage.setItem("GameEndStatus", "false");

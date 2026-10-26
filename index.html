@@ -41,8 +41,11 @@
 </head>
 <body>
   <div id="startScreen">
-    <button id="startBtn">Spiel Starten</button>
-  </div>
+    <div style="text-align: center;">
+      <h1 id="loadingText" style="color: white; backgroundColor: black; font-size: 30px;font-family: sans-serif;">LÄDT...</h1>
+    <button id="startBtn" style="display: none;">Spiel Starten</button>
+    </div>
+    </div>
   <button id="fireBtn">SHOOT</button>
 <div id="crosshair">+</div>
   <script> if(!sessionStorage.getItem("quizGemacht")) window.location.replace("Fragen.html");</script>

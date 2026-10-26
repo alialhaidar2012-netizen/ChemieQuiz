@@ -80,7 +80,7 @@
     let aktuellerIndex = 0; // Fragennummer
     const frageDiv = document.getElementById("frage-div");
   
-  function zeigeFrage{
+  function zeigeFrage(){
     frageDiv.innerHTML = ""; //Div leeren
 
     if(aktuellerIndex >= fragen.length){
@@ -103,7 +103,7 @@
     btn.onclick = function(){
       if (index === richtigeAntwort){
         let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
-        let aktuelleRaketen++;
+        aktuelleRaketen++;
         sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
         alert("Richtig! Du hast jetzt "+aktuelleRaketen+" Raketen");
         aktuellerIndex++;
@@ -113,6 +113,7 @@
     };
       frageDiv.appendChild(btn);
     });
+  }
     zeigeFrage();
   
   </script>

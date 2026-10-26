@@ -102,12 +102,15 @@
     btn.textContent = antwort;
     btn.onclick = function(){
       if (index === richtigeAntwort){
-        let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl"))+10 || 0;
+        let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
+        aktuelleRaketen += 10;
         sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
         alert("Richtig! Du hast jetzt "+aktuelleRaketen+" Raketen");
         aktuellerIndex++;
+        zeigeFrage();
       }else{
-        let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl"))-5 || 0;
+        let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
+        aktuelleRaketen -= 10;
         sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
         alert("Falsch");       
       }

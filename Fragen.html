@@ -118,11 +118,12 @@ button:active {
     weiterBtn.addEventListener('click', () => {
     aktuelleInformation++; 
     if(aktuelleInformation < informationen.length){  
+      showTutorial(aktuelleInformation);
+    }else{
       tutorialDiv.style.display = "none"; //ausblenden des Tutorials
       frageDiv.style.display = "block"
       tutorialMade = true;
-    }else{
-      showTutorial(aktuelleInformation);
+      zeigeFrage();
     }
     }, false);
     

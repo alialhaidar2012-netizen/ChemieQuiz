@@ -71,6 +71,7 @@
     let aktuelleInformation = 0;
     const tutorialDiv = document.getElementById("tutorial-div");
     const weiterBtn = document.getElementById("weiter-btn");
+    const frageDiv = document.getElementById("frage-div");
     
     const informationen = [
       "Story: Wir schreiben das Jahr 2126. Viele Menschen unter anderem auch du seid auf einen fernen Planeten namens Kepler22b gezogen, da auf der Erde Platzmangel herrscht. Doch auf diesem Planeten gibt es nur sehr wenig Silicium, das aber dringend für technische Geräte benötigt wird. Daher wird Silicium aus den Asteroiden des Todesgürtels herbeigeholt. Die Beschaffung ist gefährlich das viele Raumschiffe verunglückt sind, indem von einem Asteroiden getroffen wurden. Du bist einer der noch wenigen die diesen gefährlichen Job machen rette die Menschheit und die Zunkunft des Computers indem du die Silicium sammelst indem du Asteroiden abschießt. Die Raketen dafür bekommst indem du die folgenden Fragen richtig beantwortest. Für jede richtige Antwort erhälst du 10 Raketen und für jede falsche werden dir 5 abgezogen und du musst es nochmal Versuchen die jeweilige Frage zu beantworten. Außerdem erhälst du nochmal 10 Raketen zusätzlich. Es soll hoffentlich nicht an der Munition scheitern! Wenn du keine Raketen mehr hast verlierst du automatisch! Treffe 5 Asteroiden um zu siegen! Nehme dich vor den Asteroiden in Acht sonst verlierst du ebenfalls! Drücke auf weiter um dir die Steuerung des Raumschiffs erklären zu lassen!",
@@ -83,16 +84,15 @@
     }
 
     weiterBtn.addEventListener('click', () => {
-    aktuelleInformation++;
-    }, false);
-          
+    aktuelleInformation++; 
     if(aktuelleInformation <= informationen.length){  
-    showTutorial(aktuelleInformation);
-     }else{
       tutorialDiv.style.display = "none"; //ausblenden des Tutorials
       frageDiv.style.display = "block"
       tutorialMade = true;
-     }
+    }else{
+      showTutorial(aktuelleInformation);
+    }
+    }, false);
     
     if(tutorialMade){
     if(!sessionStorage.getItem("Raketenanzahl")){ //wenn Raketenanzahl nicht gefunden wurde
@@ -108,7 +108,6 @@
       ];
 
     let aktuellerIndex = 0; // Fragennummer
-    const frageDiv = document.getElementById("frage-div");
   
   function zeigeFrage(){
     frageDiv.innerHTML = ""; //Div leeren

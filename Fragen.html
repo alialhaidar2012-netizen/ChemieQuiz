@@ -33,8 +33,13 @@ body {
 }
 
 #tutorial-div {
-  display: block; /* Tutorial ist anfangs sichtbar */
+  display: block; 
   margin-bottom: 20px;
+  
+  /* NEU: Diese 3 Zeilen erlauben das Scrollen im Kasten */
+  max-height: 50vh; /* Der Kasten ist maximal halb so hoch wie der Bildschirm */
+  overflow-y: auto; /* Erlaubt das vertikale Scrollen */
+  padding-right: 10px; /* Platz, damit der Text nicht an der Scrollbar klebt */
 }
 
 h3 {

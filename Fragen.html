@@ -84,6 +84,7 @@
     frageDiv.innerHTML = ""; //Div leeren
 
     if(aktuellerIndex >= fragen.length){
+      sessionStorage.setItem("quizGemacht", "true");
       window.location.replace("index.html");      
       return;
     }

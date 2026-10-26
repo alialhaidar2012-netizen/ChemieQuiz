@@ -2,6 +2,13 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118/build/three.module.js';
 import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.118/examples/jsm/loaders/GLTFLoader.js';
 
+function checkLoads(){
+  //Load-Checks
+if(playerLoaded === true && rocketTemplateLoaded === true  && asteroidTemplateLoaded === true && skyboxLoaded === true){
+  document.getElementById('loadingText').innerText = "Bereit!";
+  document.getElementById('startBtn').style.display = "block";
+}
+}
 //Allgemein
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -63,9 +70,11 @@ const textures = loader.load([
   './textures/space_dn.png',
   './textures/space_rt.png',
   './textures/space_lf.png'
-]);
-scene.background = textures;
+], () => {
 skyboxLoaded = true;
+checkAllLoaded();
+});
+scene.background = textures;
 }
 //Light
 function setLights() {
@@ -157,8 +166,10 @@ asteroidLoader.load('models/Asteroid/asteroid.gltf', (gltf) => {
   asteroidModell.scale.set(10,10,10)
   asteroidTemplate = new THREE.Group(); //Template erstellen um dann viele zu spawen für Asteroidengürtel
   asteroidTemplate.add(asteroidModell);
-});
+  
   asteroidTemplateLoaded = true;
+  checkAllLoaded();
+});
 }
 createAstroidTemplate();
 
@@ -209,12 +220,14 @@ rockets.push(rocket);
    {
       const rocketModel = gltf.scene;
       
-       rocketModel.rotation.x = Math.PI / 2;
+      rocketModel.rotation.x = Math.PI / 2;
 
-       rocketTemplate = new THREE.Group();
-       rocketTemplate.add(rocketModel);
-         });
-      rocketTemplateLoaded = true;
+      rocketTemplate = new THREE.Group();
+      rocketTemplate.add(rocketModel);
+     
+      rocketTemplateLoaded = true;  
+      checkAllLoaded();
+   });
    }
  }
 function createRocket(startPosition, direction, quaternion, speed){
@@ -292,11 +305,6 @@ document.getElementById('fireBtn').addEventListener('pointerdown', (event) => {
 
 //Loop
 function animate(time) {
-  //Load-Checks
-if(playerLoaded === true && rocketTemplateLoaded === true  && asteroidTemplateLoaded === true && skyboxLoaded === true){
-  document.getElementById('loadingText').innerText = "Bereit!";
-  document.getElementById('startBtn').style.display = "block";
-}
   //GameOver checks
   if(maxRockets === 0) playerAlive = false;
   if(!playerAlive){

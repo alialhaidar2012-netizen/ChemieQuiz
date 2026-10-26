@@ -128,7 +128,7 @@ playerLoader.load('models/Player/scene.gltf', (gltf) =>{
   spielerMixer.timeScale = 0.5;
 
   playerLoaded = true;
-  checkLoads
+  checkLoads();
 });
 //Steuerung
 function onTilt(event){
@@ -182,6 +182,8 @@ function setAsteroids() {
     asteroid.position.set(0, 0, 100);
     lastAsteroidPos.copy(asteroid.position)
     firstAsteroid = true;
+    scene.add(asteroid);
+    asteroids.push(asteroid);
   }else {
   scene.add(asteroid);
   asteroids.push(asteroid);
@@ -195,8 +197,6 @@ function setAsteroids() {
 
   asteroid.position.copy(lastAsteroidPos);
   }
-  scene.add(asteroid);
-  asteroids.push(asteroid);
 }
 //schießen
 function shootPlayer() {

@@ -72,6 +72,29 @@
   z-index: 1000;
   display: none; /* Erstmal versteckt, bis das Spiel startet */
 }
+#rocketCount, #hitCount {
+  position: fixed;
+  top: 20px;
+  color: #00ffcc; /* Neon-Cyan wie das Fadenkreuz */
+  font-family: monospace; /* Cooler, technischer Look */
+  font-size: 20px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #00ffcc;
+  text-shadow: 0 0 5px #00ffcc; /* Leucht-Effekt */
+  pointer-events: none; /* WICHTIG: Damit man durch die Anzeige durchklicken kann */
+  z-index: 1000;
+}
+
+#rocketCount {
+  left: 20px; /* Oben links */
+}
+
+#hitCount {
+  right: 20px; /* Oben rechts */
+}
   </style>
 </head>
 <body>
@@ -83,6 +106,8 @@
     </div>
   <button id="fireBtn">SHOOT</button>
 <div id="crosshair">+</div>
+<div id="rocketCount">Raketen: 0</div>
+<div id="hitCount">Treffer: 0 von 10</div>
   <script> if(!sessionStorage.getItem("quizGemacht")) window.location.replace("Fragen.html");</script>
   <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
   <script>eruda.init();</script>

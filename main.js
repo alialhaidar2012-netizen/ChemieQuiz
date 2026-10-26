@@ -53,6 +53,8 @@ let lastAsteroidPos = new THREE.Vector3();
 let getroffeneAsteroidenAnzahl = 0;
 
 //Steuerung
+let rawX = 0;
+let rawY = 0;
 let tiltX = 0;
 let tiltY = 0;
 let smoothX = 0;
@@ -137,17 +139,17 @@ playerLoader.load('models/Player/scene.gltf', (gltf) =>{
 function onTilt(event){
   if (event.beta === null || event.gamma === null) return;
 
-  const angle = screen.orientation ? screen.orietation.angle : (window.orientation || 0);
+  const angle = screen.orientation ? screen.orientation.angle : (window.orientation || 0);
   const isQuerformat = window.innerWidth > window.innerHeight;
 
   const naturalLandscape = isQuerformat === (angle % 180 === 0);
 
   if(naturalLandscape){
-  let rawX = event.gamma;
-  let rawY = event.beta;
+  rawX = event.gamma;
+  rawY = event.beta;
   }else{
-  let rawX = isQuerformat ? event.beta : event.gamma;
-  let rawY = isQuerformat ? event.gamma : event.beta;
+  rawX = isQuerformat ? event.beta : event.gamma;
+  rawY = isQuerformat ? event.gamma : event.beta;
   }
   if(!isCalibrated){
     neutralX = rawX;

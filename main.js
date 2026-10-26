@@ -25,7 +25,7 @@ let playerAlive = true;
 let playerRocketSpeed = 100;
 
 //Raketen
-let maxRockets = 10; //Standard Anzahl
+let maxRockets = parseInt(sessionStorage.getItem("Raketenanzahl"))+10 || 0; //Standard Anzahl
 
 let spielerZielRadius = 15;
 let rockets = [];
@@ -286,6 +286,7 @@ document.getElementById('fireBtn').addEventListener('pointerdown', (event) => {
 
 //Loop
 function animate(time) {
+  if(maxRockets === 0) playerAlive = false;
   if(!playerAlive){
      sessionStorage.setItem("GameEndStatus", "false");
      window.location.replace('GameEnd.html');

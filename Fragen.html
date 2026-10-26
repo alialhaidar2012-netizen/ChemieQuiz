@@ -65,6 +65,9 @@
 <body>
   <div id="Frage-div"></div>
   <script>
+    if(!sessionStorage.getItem("Raketenanzahl")){ //wenn Raketenanzahl nicht gefunden wurde
+      sessionStorage.setItem("Raketenanzahl", "10");
+    }
     const fragen = [
       ['Aus welcher Sprache kommt der Name von Silicium?',["Latein", "Griechisch", "Schwedisch"], 0],
       ['Welche Ordnungszahl hat Silicium?',["17", "23", "14"], 2],

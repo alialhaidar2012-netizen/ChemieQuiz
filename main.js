@@ -189,7 +189,7 @@ function setAsteroids() {
   if(asteroids.length >= 50) return;
   let asteroid = asteroidTemplate.clone();
   if(!firstAsteroid){
-    asteroid.position.set(0, 0, 100);
+    asteroid.position.set(0, 0, 150);
     lastAsteroidPos.copy(asteroid.position)
     firstAsteroid = true;
     scene.add(asteroid);

@@ -136,12 +136,19 @@ playerLoader.load('models/Player/scene.gltf', (gltf) =>{
 //Steuerung
 function onTilt(event){
   if (event.beta === null || event.gamma === null) return;
-  
+
+  const angle = screen.orientation ? screen.orietation.angle : (window.orientation || 0);
   const isQuerformat = window.innerWidth > window.innerHeight;
 
+  const naturalLandscape = isQuerformat === (angle % 180 === 0);
+
+  if(naturalLandscape){
+  let rawX = event.gamma;
+  let rawY = event.beta;
+  }else{
   let rawX = isQuerformat ? event.beta : event.gamma;
   let rawY = isQuerformat ? event.gamma : event.beta;
-  
+  }
   if(!isCalibrated){
     neutralX = rawX;
     neutralY = rawY;

@@ -72,7 +72,7 @@ const textures = loader.load([
   './textures/space_lf.png'
 ], () => {
 skyboxLoaded = true;
-checkAllLoaded();
+checkLoads();
 });
 scene.background = textures;
 }
@@ -168,7 +168,7 @@ asteroidLoader.load('models/Asteroid/asteroid.gltf', (gltf) => {
   asteroidTemplate.add(asteroidModell);
   
   asteroidTemplateLoaded = true;
-  checkAllLoaded();
+  checkLoads();
 });
 }
 createAstroidTemplate();
@@ -226,7 +226,7 @@ rockets.push(rocket);
       rocketTemplate.add(rocketModel);
      
       rocketTemplateLoaded = true;  
-      checkAllLoaded();
+      checkLoads();
    });
    }
  }

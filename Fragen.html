@@ -101,16 +101,20 @@
     btn.textContent = antwort;
     btn.onclick = function(){
       if (index === richtigeAntwort){
-        alert("Richtig");
+        let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
+        let aktuelleRaketen++;
+        sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
+        alert("Richtig! Du hast jetzt "+aktuelleRaketen+" Raketen");
         aktuellerIndex++;
+        zeigeFrage();
       }else{
         alert("Falsch");       
       }
     };
       frageDiv.appendChild(btn);
     });
-  
     zeigeFrage();
+  
   </script>
 </body>
 </html>

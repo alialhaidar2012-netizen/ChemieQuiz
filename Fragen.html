@@ -63,7 +63,7 @@
 </style>
 </head>
 <body>
-  <div id="Frage-div"></div>
+  <div id="frage-div"></div>
   <script>
     if(!sessionStorage.getItem("Raketenanzahl")){ //wenn Raketenanzahl nicht gefunden wurde
       sessionStorage.setItem("Raketenanzahl", "10");
@@ -107,7 +107,6 @@
         sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
         alert("Richtig! Du hast jetzt "+aktuelleRaketen+" Raketen");
         aktuellerIndex++;
-        zeigeFrage();
       }else{
         alert("Falsch");       
       }

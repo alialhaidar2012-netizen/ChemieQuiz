@@ -84,8 +84,7 @@
     frageDiv.innerHTML = ""; //Div leeren
 
     if(aktuellerIndex >= fragen.length){
-      frageDiv.innerHTML = "<h3>Super! Alle Fragenbeantwortet</h3>"
-      
+      window.location.replace("index.html");      
       return;
     }
     let frage = fragen[aktuellerIndex]

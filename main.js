@@ -34,6 +34,8 @@ let playerRocketSpeed = 100;
 //Raketen
 let maxRockets = parseInt(sessionStorage.getItem("Raketenanzahl"))+10 || 0; //Standard Anzahl
 let rocketsLeft = maxRockets;
+document.getElementById('rocketCount').innerText = "Raketen: " + rocketsLeft;
+
 let rocketTemplateLoaded = false;
 let spielerZielRadius = 15;
 let rockets = [];
@@ -238,7 +240,7 @@ document.getElementById('rocketCount').innerText = "Raketen: " + rocketsLeft;
    }
  }
 function createRocket(startPosition, direction, quaternion, speed){
-  if (maxRockets === 0 && getroffeneAsteroidenAnzahl < 10)  playerAlive = false;
+  if (maxRockets === 0 && getroffeneAsteroidenAnzahl < 5)  playerAlive = false;
   if (!rocketTemplate) return null; 
   const rocket = rocketTemplate.clone();
   
@@ -299,7 +301,7 @@ function checkCollisions(zielRadius){
       scene.remove(rocket.mesh);
       getroffeneAsteroidenAnzahl++;
 
-      document.getElementById('hitCount').innerText = "Treffer: "+ getroffeneAsteroidenAnzahl + " von 10"
+      document.getElementById('hitCount').innerText = "Treffer: "+ getroffeneAsteroidenAnzahl + " von 5"
       break; // beende die Schleife
       }
     }
@@ -322,7 +324,7 @@ function animate(time) {
   }
 
   //Bei Gewinn Seite wechseln
-  if(getroffeneAsteroidenAnzahl >= 10){
+  if(getroffeneAsteroidenAnzahl >= 5){
       sessionStorage.setItem("GameEndStatus", "true");
       window.location.replace('GameEnd.html');
   }

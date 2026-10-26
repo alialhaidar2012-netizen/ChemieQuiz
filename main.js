@@ -33,6 +33,7 @@ let playerRocketSpeed = 100;
 
 //Raketen
 let maxRockets = parseInt(sessionStorage.getItem("Raketenanzahl"))+10 || 0; //Standard Anzahl
+let rocketsLeft = maxRockets;
 let rocketTemplateLoaded = false;
 let spielerZielRadius = 15;
 let rockets = [];
@@ -200,6 +201,7 @@ function setAsteroids() {
 }
 //schießen
 function shootPlayer() {
+if(rocketsLeft > 0){
   const dir = new THREE.Vector3(0,0,1);
   dir.applyQuaternion(spielerContainer.quaternion);
   dir.normalize();
@@ -210,6 +212,10 @@ function shootPlayer() {
   playerRocketSpeed
   );
 rockets.push(rocket);
+
+rocketsLeft--;
+document.getElementById('rocketCount').innerText = "Raketen: " + rocketsLeft;
+  }
 }
  if (!rocketTemplate) {
     createRocketTemplate();
@@ -292,6 +298,8 @@ function checkCollisions(zielRadius){
       rockets.splice(j,1);
       scene.remove(rocket.mesh);
       getroffeneAsteroidenAnzahl++;
+
+      document.getElementById('hitCount').innerText = "Treffer: "+ getroffeneAsteroidenAnzahl + " von 10"
       break; // beende die Schleife
       }
     }
@@ -307,7 +315,7 @@ document.getElementById('fireBtn').addEventListener('pointerdown', (event) => {
 //Loop
 function animate(time) {
   //GameOver checks
-  if(maxRockets === 0) playerAlive = false;
+  if(rocketsLeft <= 0 && getroffeneAsteroidenAnzahl < 19) playerAlive = false;
   if(!playerAlive){
      sessionStorage.setItem("GameEndStatus", "false");
      window.location.replace('GameEnd.html');

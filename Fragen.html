@@ -1,122 +1,105 @@
 <!DOCTYPE html>
+<html lang="de">
 <head>
   <title>Fragen</title>
   <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background-color: #0d1117;
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; 
-}
+    body {
+      margin: 0;
+      height: 100vh;
+      background-color: #0d1117;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; 
+    }
 
-/* Gemeinsamer Style für Tutorial und Fragen */
-#frage-div, #tutorial-div {
-  background: #1c2128;
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 500px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  line-height: 1.6; /* Macht den langen Text besser lesbar */
-  font-size: 1.1rem;
-}
+    #frage-div, #tutorial-div {
+      background: #1c2128;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
 
-#frage-div {
-  display: none; /* Fragen sind anfangs versteckt */
-}
+    #frage-div { display: none; }
 
-#tutorial-div {
-  display: block; 
-  margin-bottom: 20px;
-  
-  /* NEU: Diese 3 Zeilen erlauben das Scrollen im Kasten */
-  max-height: 50vh; /* Der Kasten ist maximal halb so hoch wie der Bildschirm */
-  overflow-y: auto; /* Erlaubt das vertikale Scrollen */
-  padding-right: 10px; /* Platz, damit der Text nicht an der Scrollbar klebt */
-}
+    #tutorial-div {
+      display: block; 
+      margin-bottom: 20px;
+      max-height: 40vh; 
+      overflow-y: auto; 
+      padding-right: 10px; 
+    }
 
-h3 {
-  font-size: 1.4rem;
-  margin-top: 0;
-  margin-bottom: 25px;
-  color: #00ffcc;
-}
+    h3 {
+      font-size: 1.4rem;
+      margin-top: 0;
+      margin-bottom: 25px;
+      color: #00ffcc;
+    }
 
-/* Standard-Button-Style (für die Antwortmöglichkeiten) */
-button {
-  display: block; 
-  width: 100%;
-  padding: 18px;
-  margin-bottom: 12px;
-  background-color: #2d333b;
-  color: white;
-  border: 2px solid #444c56;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent; 
-  transition: transform 0.1s ease, background-color 0.1s ease;
-}
+    button {
+      display: block; 
+      width: 100%;
+      padding: 18px;
+      margin-bottom: 12px;
+      background-color: #2d333b;
+      color: white;
+      border: 2px solid #444c56;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent; 
+      transition: transform 0.1s ease, background-color 0.1s ease;
+    }
 
-button:active {
-  background-color: #444c56;
-  border-color: #00ffcc;
-  transform: scale(0.97);
-}
+    button:active {
+      background-color: #444c56;
+      border-color: #00ffcc;
+      transform: scale(0.97);
+    }
 
-/* Spezieller Style für den "Weiter"-Button */
-#weiter-btn {
-  background-color: #4488ff;
-  border-color: #4488ff;
-  width: auto;
-  padding: 15px 40px;
-  margin: 0 auto;
-  font-weight: bold;
-  display: block;
-}
+    #weiter-btn {
+      background-color: #4488ff;
+      border-color: #4488ff;
+      width: auto;
+      padding: 15px 40px;
+      margin: 0 auto;
+      font-weight: bold;
+      display: block;
+    }
 
-#weiter-btn:active {
-  background-color: #2d333b;
-}
-
-@media (max-width: 600px) {
-  input, button {
-    font-size: 16px; 
-  }
-}
-</style>
+    #weiter-btn:active { background-color: #2d333b; }
+  </style>
 </head>
 <body>
   <div id="frage-div"></div>
   <div id="tutorial-div"></div>
   <button id="weiter-btn">Weiter</button>
+  
   <script>
-    let tutorialMade= false;
     let aktuelleInformation = 0;
     const tutorialDiv = document.getElementById("tutorial-div");
     const weiterBtn = document.getElementById("weiter-btn");
-
+    const frageDiv = document.getElementById("frage-div"); // Nach oben verschoben
+    
     const informationen = [
       "Story: Wir schreiben das Jahr 2126. Viele Menschen unter anderem auch du seid auf einen fernen Planeten namens Kepler22b gezogen, da auf der Erde Platzmangel herrscht. Doch auf diesem Planeten gibt es nur sehr wenig Silicium, das aber dringend für technische Geräte benötigt wird. Daher wird Silicium aus den Asteroiden des Todesgürtels herbeigeholt. Die Beschaffung ist gefährlich das viele Raumschiffe verunglückt sind, indem von einem Asteroiden getroffen wurden. Du bist einer der noch wenigen die diesen gefährlichen Job machen rette die Menschheit und die Zunkunft des Computers indem du die Silicium sammelst indem du Asteroiden abschießt. Die Raketen dafür bekommst indem du die folgenden Fragen richtig beantwortest. Für jede richtige Antwort erhälst du 10 Raketen und für jede falsche werden dir 5 abgezogen und du musst es nochmal Versuchen die jeweilige Frage zu beantworten. Außerdem erhälst du nochmal 10 Raketen zusätzlich. Es soll hoffentlich nicht an der Munition scheitern! Wenn du keine Raketen mehr hast verlierst du automatisch! Treffe 5 Asteroiden um zu siegen! Nehme dich vor den Asteroiden in Acht sonst verlierst du ebenfalls! Drücke auf weiter um dir die Steuerung des Raumschiffs erklären zu lassen!",
       "Steuerung: Die Rotation und die Höhe des Raumschiffs regulierst du durch die Drehung deines Handys nach links, nach rechts, nach oben oder unten. Du schießt mit dem SHOOT-Button. Drücke auf weiter",
       "Warnung: Bei Apple-Geräten wird in der Regel ein Bestätiguns-PopUp geschickt was du annehmen musst damit die Rotationsaufnahme funktioniert! Halte dein Gerät stets im Querformat! Beantworte nun die Fragen zu Silicium und lege los!"
     ];
 
-    function showTutorial(aktuelleInformationen) {
-      tutorialDiv.innerText = informationen[aktuelleInformation];
-    }
-    showTutorial(aktuelleInformation);
-    
-    if(!sessionStorage.getItem("Raketenanzahl")){ //wenn Raketenanzahl nicht gefunden wurde
+    if(!sessionStorage.getItem("Raketenanzahl")){ 
       sessionStorage.setItem("Raketenanzahl", "10");
-      
+    }
+
     const fragen = [
       ['Aus welcher Sprache kommt der Name von Silicium?',["Latein", "Griechisch", "Schwedisch"], 0],
       ['Welche Ordnungszahl hat Silicium?',["17", "23", "14"], 2],
@@ -124,62 +107,64 @@ button:active {
       ['Wo wird Silicium für die Energiegewinnung genutzt?',["Windenergie", "Fusionsenergie", "Solarenergie"], 2],
       ['Aus was wird Silicium Nahrungsergänzungsmittel hergestellt?',["Efeu", "Bambus", "Stechpalme"], 1],
       ['Wann wurde zum ersten Mal reines Silicium hergestellt?',["1824", "1845", "1832"], 0]
-      ];
+    ];
 
-    let aktuellerIndex = 0; // Fragennummer
+    let aktuellerIndex = 0;
   
-  function zeigeFrage(){
-    frageDiv.innerHTML = ""; //Div leeren
+    function zeigeFrage(){
+      frageDiv.innerHTML = "";
 
-    if(aktuellerIndex >= fragen.length){
-      sessionStorage.setItem("quizGemacht", "true");
-      window.location.replace("index.html");      
-      return;
-    }
-    let frage = fragen[aktuellerIndex]
-    let frageStellung = frage[0];
-    let antwortmöglichkeiten = frage[1];
-    let richtigeAntwort = frage[2];
-    const frageDiv = document.getElementById("frage-div");
-    
-    let  frageText = document.createElement("h3"); // Frage als h3 stellen
-    frageText.textContent = frageStellung;
-    frageDiv.appendChild(frageText);
-  
-    antwortmöglichkeiten.forEach(function(antwort, index){   //zeigt Antwortmöglichkeiten als Buttons
-    let btn = document.createElement("button");
-    btn.textContent = antwort;
-    btn.onclick = function(){
-      if (index === richtigeAntwort){
-        let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
-        aktuelleRaketen += 10;
-        sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
-        alert("Richtig! Du hast jetzt "+aktuelleRaketen+" Raketen");
-        aktuellerIndex++;
-        zeigeFrage();
-      }else{
-        let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
-        aktuelleRaketen -= 5;
-        sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
-        alert("Falsch! Du hast jetzt noch " + aktuelleRaketen+" Raketen");       
+      if(aktuellerIndex >= fragen.length){
+        sessionStorage.setItem("quizGemacht", "true");
+        window.location.replace("index.html");      
+        return;
       }
-    };
-      frageDiv.appendChild(btn);
-    });
-  }
-    zeigeFrage();
+      let frage = fragen[aktuellerIndex];
+      let frageStellung = frage[0];
+      let antwortmöglichkeiten = frage[1];
+      let richtigeAntwort = frage[2];
+      
+      let frageText = document.createElement("h3");
+      frageText.textContent = frageStellung;
+      frageDiv.appendChild(frageText);
+  
+      antwortmöglichkeiten.forEach(function(antwort, index){
+        let btn = document.createElement("button");
+        btn.textContent = antwort;
+        
+        btn.onclick = function(){
+          if (index === richtigeAntwort){
+            let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
+            aktuelleRaketen += 10;
+            sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
+            alert("Richtig! Du hast jetzt "+aktuelleRaketen+" Raketen");
+            aktuellerIndex++;
+            zeigeFrage();
+          }else{
+            let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
+            aktuelleRaketen -= 5;
+            sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
+            alert("Falsch! Du hast jetzt noch " + aktuelleRaketen+" Raketen");       
+          }
+        };
+        frageDiv.appendChild(btn);
+      });
     }
+
+    function showTutorial(aktuelleInformation) {
+      tutorialDiv.innerText = informationen[aktuelleInformation];
+    }
+    showTutorial(aktuelleInformation);
     
     weiterBtn.addEventListener('click', () => {
-    aktuelleInformation++; 
-    if(aktuelleInformation < informationen.length){  
-      showTutorial(aktuelleInformation);
-    }else{
-      tutorialDiv.style.display = "none"; //ausblenden des Tutorials
-      frageDiv.style.display = "block"
-      tutorialMade = true;
-      zeigeFrage();
-    }
+      aktuelleInformation++; 
+      if(aktuelleInformation < informationen.length){  
+        showTutorial(aktuelleInformation);
+      }else{
+        tutorialDiv.style.display = "none";
+        frageDiv.style.display = "block";
+        zeigeFrage();
+      }
     }, false);    
   </script>
 </body>

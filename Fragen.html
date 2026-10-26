@@ -110,9 +110,9 @@
         zeigeFrage();
       }else{
         let aktuelleRaketen = parseInt(sessionStorage.getItem("Raketenanzahl")) || 0;
-        aktuelleRaketen -= 10;
+        aktuelleRaketen -= 5;
         sessionStorage.setItem("Raketenanzahl", aktuelleRaketen.toString());
-        alert("Falsch");       
+        alert("Falsch! Du hast jetzt noch " + aktuelleRaketen+" Raketen");       
       }
     };
       frageDiv.appendChild(btn);

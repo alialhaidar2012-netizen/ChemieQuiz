@@ -128,6 +128,7 @@ playerLoader.load('models/Player/scene.gltf', (gltf) =>{
   spielerMixer.timeScale = 0.5;
 
   playerLoaded = true;
+  checkLoads
 });
 //Steuerung
 function onTilt(event){

@@ -18,6 +18,41 @@
       background: #111; color: white; z-index: 9999;
       display: flex; justify-content: center; align-items: center;
     }
+    #fireBtn {
+  /* 1. Positionierung (Unten rechts, wo der Daumen ruht) */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  
+  /* 2. Größe & Form (Groß genug für den Daumen) */
+  width: 90px;
+  height: 90px;
+  border-radius: 50%; /* Macht den Button komplett rund */
+  
+  /* 3. Farben & Optik */
+  background-color: rgba(255, 68, 68, 0.8); /* Halbtransparentes Rot */
+  color: white;
+  border: 3px solid #ff4c4c;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  
+  /* 4. Touch-Optimierungen für Handys */
+  -webkit-tap-highlight-color: transparent; /* Kein grauer Kasten beim Tippen */
+  touch-action: manipulation; /* Verhindert versehentliches Zoomen beim schnellen Tippen */
+  outline: none;
+  
+  /* 5. Animation für das Drücken */
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+/* Der "Drück-Effekt" */
+#fireBtn:active {
+  background-color: rgba(255, 0, 0, 1); /* Volles Rot beim Drücken */
+  transform: scale(0.9); /* Button zieht sich zusammen (fühlt sich an wie ein echter Knopf) */
+}
     #startBtn {
       padding: 20px 40px; font-size: 24px; cursor: pointer;
       background: #4488ff; color: white; border: none; border-radius: 10px;

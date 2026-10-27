@@ -170,6 +170,8 @@ function onTilt(event){
 
   tiltX = smoothX;
   tiltY = smoothY;
+
+  if (Math.random() < 0.03) console.log("angle:", angle, "quer:", isQuerformat, "beta:", Math.round(event.beta), "gamma:", Math.round(event.gamma));
 }
 //Asteroiden Laden und Platz festlegen
 function createAstroidTemplate() {
